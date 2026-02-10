@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Monika ❤️ Satz</title>
 
@@ -64,17 +64,15 @@
     }
 
     iframe {
-      width: 0;
-      height: 0;
-      border: 0;
-      visibility: hidden;
+      width: 100%;
+      border-radius: 15px;
+      margin-top: 15px;
     }
 
     .hidden {
       display: none;
     }
 
-    /* Sparkles */
     .sparkle {
       position: fixed;
       width: 6px;
@@ -95,12 +93,8 @@
 
 <body>
 
-  <!-- Hidden autoplay music (muted) -->
-  <iframe
-    id="bgm"
-    src="https://www.youtube.com/embed/8J6yF6J5q1o?autoplay=1&mute=1&loop=1&playlist=8J6yF6J5q1o"
-    allow="autoplay">
-  </iframe>
+  <!-- AUTOPLAY MUSIC -->
+  <audio id="bgmAudio" src="bgm.mp3" autoplay loop></audio>
 
   <!-- SCREEN 1 -->
   <div class="container" id="card1">
@@ -113,7 +107,7 @@
 
     <div class="names">Monika ❤️ Satz</div>
 
-    <button class="yes" onclick="nextScreen()">Yes 💕</button>
+    <button class="yes" onclick="showFinal()">Yes 💕</button>
     <button class="no" onmouseover="moveButton(this)">No 🙈</button>
 
     <p style="font-size:14px;">
@@ -130,9 +124,20 @@
       aana sila per vaazhkaiyae maarum.”
     </p>
 
-    <h1>Will you go on a date with me? 🌹</h1>
+    <p>
+      Neenga vandha apram,  
+      en days ellam konjam azhaga irukku ✨
+    </p>
 
+    <h1>Will you go on a date with me? 🌹</h1>
     <p style="font-size:14px;">– Satz 😌</p>
+
+    <!-- Funny Tamil Clip -->
+    <iframe height="200"
+      src="https://www.youtube.com/embed/2f1E7v5xGf0"
+      title="Tamil Fun Clip"
+      allowfullscreen>
+    </iframe>
   </div>
 
   <script>
@@ -142,17 +147,12 @@
       btn.style.left = Math.random() * 80 + "vw";
     }
 
-    function nextScreen() {
-      unmuteMusic();
+    function showFinal() {
       document.getElementById("card1").classList.add("hidden");
       document.getElementById("card2").classList.remove("hidden");
     }
 
-    function unmuteMusic() {
-      const iframe = document.getElementById("bgm");
-      iframe.src = iframe.src.replace("mute=1", "mute=0");
-    }
-
+    // Sparkle particles
     setInterval(() => {
       const s = document.createElement("div");
       s.className = "sparkle";
