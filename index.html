@@ -26,13 +26,11 @@
       text-align: center;
       box-shadow: 0 15px 40px rgba(0,0,0,0.25);
       z-index: 2;
-      position: relative;
     }
 
     h1 {
       color: #e63946;
       font-size: 24px;
-      margin-bottom: 10px;
     }
 
     p {
@@ -66,9 +64,10 @@
     }
 
     iframe {
-      width: 100%;
-      border-radius: 15px;
-      margin-top: 15px;
+      width: 0;
+      height: 0;
+      border: 0;
+      visibility: hidden;
     }
 
     .hidden {
@@ -80,17 +79,12 @@
       position: fixed;
       width: 6px;
       height: 6px;
-      background: rgba(255, 255, 255, 0.9);
+      background: rgba(255,255,255,0.9);
       border-radius: 50%;
-      pointer-events: none;
       animation: sparkle 4s linear infinite;
     }
 
     @keyframes sparkle {
-      from {
-        transform: translateY(0) scale(1);
-        opacity: 1;
-      }
       to {
         transform: translateY(-120vh) scale(0);
         opacity: 0;
@@ -101,7 +95,14 @@
 
 <body>
 
-  <!-- MAIN CARD -->
+  <!-- Hidden autoplay music (muted) -->
+  <iframe
+    id="bgm"
+    src="https://www.youtube.com/embed/8J6yF6J5q1o?autoplay=1&mute=1&loop=1&playlist=8J6yF6J5q1o"
+    allow="autoplay">
+  </iframe>
+
+  <!-- SCREEN 1 -->
   <div class="container" id="card1">
     <h1>Will you be my Valentine, Monika? 💖</h1>
 
@@ -112,48 +113,26 @@
 
     <div class="names">Monika ❤️ Satz</div>
 
-    <p style="font-size:14px;">🎵 Tap play & feel the vibe</p>
-    <iframe height="60"
-      src="https://www.youtube.com/embed/5t8zqYJxY1Q"
-      title="Minnale BGM"
-      allowfullscreen>
-    </iframe>
-
     <button class="yes" onclick="nextScreen()">Yes 💕</button>
     <button class="no" onmouseover="moveButton(this)">No 🙈</button>
-
-    <iframe height="200"
-      src="https://www.youtube.com/embed/6xQkqN3Z9sE"
-      title="Tamil Fun Clip"
-      allowfullscreen>
-    </iframe>
 
     <p style="font-size:14px;">
       Idhu paatha apram “No” press panna manasu varadhu 😄
     </p>
   </div>
 
-  <!-- FINAL PROPOSAL SCREEN -->
+  <!-- FINAL SCREEN -->
   <div class="container hidden" id="card2">
     <h1>Monika… 💖</h1>
 
     <p>
       “Sila per vaazhkaila varuvaanga…  
-      aana sila per vaazhkaiyae maarum.”  
+      aana sila per vaazhkaiyae maarum.”
     </p>
 
-    <p>
-      Neenga vandha apram,  
-      en days ellam konjam azhaga irukku ✨
-    </p>
+    <h1>Will you go on a date with me? 🌹</h1>
 
-    <h1 style="margin-top:20px;">
-      Will you go on a date with me? 🌹
-    </h1>
-
-    <p style="margin-top:10px; font-size:14px;">
-      – Satz 😌
-    </p>
+    <p style="font-size:14px;">– Satz 😌</p>
   </div>
 
   <script>
@@ -164,20 +143,23 @@
     }
 
     function nextScreen() {
+      unmuteMusic();
       document.getElementById("card1").classList.add("hidden");
       document.getElementById("card2").classList.remove("hidden");
     }
 
-    // AI-style sparkles
+    function unmuteMusic() {
+      const iframe = document.getElementById("bgm");
+      iframe.src = iframe.src.replace("mute=1", "mute=0");
+    }
+
     setInterval(() => {
       const s = document.createElement("div");
       s.className = "sparkle";
       s.style.left = Math.random() * 100 + "vw";
       s.style.bottom = "-10px";
-      s.style.animationDuration = (Math.random() * 3 + 3) + "s";
       document.body.appendChild(s);
-
-      setTimeout(() => s.remove(), 5000);
+      setTimeout(() => s.remove(), 4000);
     }, 200);
   </script>
 
